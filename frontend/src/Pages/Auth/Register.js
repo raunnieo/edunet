@@ -1,41 +1,27 @@
-// SignupPage.js
-import { useCallback, useEffect, useState } from "react";
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import "./auth.css";
-import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import { useEffect, useState } from "react";
+import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { registerAPI } from "../../utils/ApiRequest";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { registerAPI } from "../../utils/ApiRequest";
+import munshiLogo from "../../assets/munshi.jpg";
+import "./auth.css";
 
 const Register = () => {
-
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if(localStorage.getItem('user')){
-      navigate('/');
+    if (localStorage.getItem("user")) {
+      navigate("/");
     }
   }, [navigate]);
 
-  const particlesInit = useCallback(async (engine) => {
-    // console.log(engine);
-    await loadFull(engine);
-  }, []);
-
-  const particlesLoaded = useCallback(async (container) => {
-    // await console.log(container);
-  }, []);
-
   const [values, setValues] = useState({
-    name : "",
-    email : "",
-    password : "",
-
+    name: "",
+    email: "",
+    password: "",
   });
 
   const toastOptions = {
@@ -46,153 +32,156 @@ const Register = () => {
     pauseOnHover: false,
     draggable: true,
     progress: undefined,
-    theme: "dark",
-  }
+    theme: "light",
+  };
 
   const handleChange = (e) => {
-    setValues({...values , [e.target.name]: e.target.value});
-  }
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-      const {name, email, password} = values;
+    const { name, email, password } = values;
 
-      setLoading(false);
-     
-      const {data} = await axios.post(registerAPI, {
+    if (!name || !email || !password) {
+      toast.error("Please fill all fields", toastOptions);
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const { data } = await axios.post(registerAPI, {
         name,
         email,
-        password
+        password,
       });
 
-      if(data.success === true){
+      if (data.success === true) {
         delete data.user.password;
         localStorage.setItem("user", JSON.stringify(data.user));
         toast.success(data.message, toastOptions);
-        setLoading(true);
         navigate("/");
-      }
-      else{
+      } else {
         toast.error(data.message, toastOptions);
-        setLoading(false);
       }
-    };
+    } catch (error) {
+      toast.error("Registration failed. Please try again.", toastOptions);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <>
-    <div style={{ position: 'relative', overflow: 'hidden' }}>
-      <Particles
-        id="tsparticles"
-        init={particlesInit}
-        loaded={particlesLoaded}
-        options={{
-          background: {
-            color: {
-              value: '#000',
-            },
-          },
-          fpsLimit: 60,
-          particles: {
-            number: {
-              value: 200,
-              density: {
-                enable: true,
-                value_area: 800,
-              },
-            },
-            color: {
-              value: '#ffcc00',
-            },
-            shape: {
-              type: 'circle',
-            },
-            opacity: {
-              value: 0.5,
-              random: true,
-            },
-            size: {
-              value: 3,
-              random: { enable: true, minimumValue: 1 },
-            },
-            links: {
-              enable: false,
-            },
-            move: {
-              enable: true,
-              speed: 2,
-            },
-            life: {
-              duration: {
-                sync: false,
-                value: 3,
-              },
-              count: 0,
-              delay: {
-                random: {
-                  enable: true,
-                  minimumValue: 0.5,
-                },
-                value: 1,
-              },
-            },
-          },
-          detectRetina: true,
-        }}
-        style={{
-          position: 'absolute',
-          zIndex: -1,
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-        }}
-      />
-
-      <Container className="mt-5" style={{position: 'relative', zIndex: "2 !important", color:"white !important"}}>
-      <Row>
-        <h1 className="text-center">
-          <AccountBalanceWalletIcon sx={{ fontSize: 40, color: "white"}}  className="text-center" />
-        </h1>
-        <h1 className="text-center text-white">Welcome to Expense Management System</h1>
-        <Col md={{ span: 6, offset: 3 }}>
-          <h2 className="text-white text-center mt-5" >Registration</h2>
-          <Form>
-            <Form.Group controlId="formBasicName" className="mt-3" >
-              <Form.Label className="text-white">Name</Form.Label>
-              <Form.Control type="text"  name="name" placeholder="Full name" value={values.name} onChange={handleChange} />
-            </Form.Group>
-            <Form.Group controlId="formBasicEmail" className="mt-3">
-              <Form.Label className="text-white">Email address</Form.Label>
-              <Form.Control type="email"  name="email" placeholder="Enter email" value={values.email} onChange={handleChange}/>
-            </Form.Group>
-
-            <Form.Group controlId="formBasicPassword" className="mt-3">
-              <Form.Label className="text-white">Password</Form.Label>
-              <Form.Control type="password"  name="password" placeholder="Password" value={values.password} onChange={handleChange} />
-            </Form.Group>
-            <div style={{width: "100%", display: "flex" , alignItems:"center", justifyContent:"center", flexDirection: "column"}} className="mt-4">
-              <Link to="/forgotPassword" className="text-white lnk" >Forgot Password?</Link>
-
-              <Button
-                  type="submit"
-                  className=" text-center mt-3 btnStyle"
-                  onClick={!loading ? handleSubmit : null}
-                  disabled={loading}
-                >
-                  {loading ? "Registering..." : "Signup"}
-                </Button>
-
-              <p className="mt-3" style={{color: "#9d9494"}}>Already have an account? <Link to="/login" className="text-white lnk" >Login</Link></p>
+    <div className="login-landing-page">
+      <div className="login-navbar">
+        <Container>
+          <div className="d-flex justify-content-between align-items-center py-3">
+            <div className="d-flex align-items-center">
+              <img
+                src={munshiLogo}
+                alt="Munshi"
+                className="munshi-logo-small me-2"
+              />
+              <span className="munshi-brand">MUNSHI</span>
             </div>
-          </Form>
-        </Col>
-      </Row>
-    <ToastContainer />
-    </Container>
-    </div>
-    </>
-  )
-}
+            <div>
+              <Link to="/login">
+                <Button variant="outline-light" className="register-button">
+                  Login
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </Container>
+      </div>
 
-export default Register
+      <Container
+        className="d-flex align-items-center justify-content-center"
+        style={{ minHeight: "calc(100vh - 68px)" }}
+      >
+        <Row className="w-100 justify-content-center">
+          <Col md={8} lg={6}>
+            <Card className="login-card">
+              <Card.Body>
+                <div className="text-center mb-4">
+                  <img
+                    src={munshiLogo}
+                    alt="Munshi"
+                    className="munshi-login-logo"
+                  />
+                  <h2 className="login-title">Create Account</h2>
+                  <p className="text-muted">
+                    Start managing your finances today
+                  </p>
+                </div>
+                <Form>
+                  <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Label>Full Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter your full name"
+                      name="name"
+                      value={values.name}
+                      onChange={handleChange}
+                      className="login-input"
+                    />
+                  </Form.Group>
+
+                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control
+                      type="email"
+                      placeholder="Enter your email"
+                      name="email"
+                      value={values.email}
+                      onChange={handleChange}
+                      className="login-input"
+                    />
+                    <Form.Text className="text-muted">
+                      We'll never share your email with anyone else.
+                    </Form.Text>
+                  </Form.Group>
+
+                  <Form.Group className="mb-4" controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                      type="password"
+                      placeholder="Create a secure password"
+                      name="password"
+                      value={values.password}
+                      onChange={handleChange}
+                      className="login-input"
+                    />
+                  </Form.Group>
+
+                  <Button
+                    type="submit"
+                    className="login-button w-100"
+                    onClick={!loading ? handleSubmit : null}
+                    disabled={loading}
+                  >
+                    {loading ? "Creating Account..." : "Register"}
+                  </Button>
+                </Form>
+                <div className="text-center mt-4">
+                  <p className="text-muted">
+                    Already have an account?{" "}
+                    <Link to="/login" className="signup-link">
+                      Log in
+                    </Link>
+                  </p>
+                </div>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+
+      <ToastContainer />
+    </div>
+  );
+};
+
+export default Register;

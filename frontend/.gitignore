@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# filepath: ./.gitignore
+backend/node_modules/
+backend/P4 Lecture Notes/
+frontend/node_modules/
