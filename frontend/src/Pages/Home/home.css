@@ -1,0 +1,303 @@
+/* home.css */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #7f85d5; /* Updated to match logo */
+  --primary-light: #ecedfb;
+  --primary-dark: #6971c9;
+  --secondary-color: #f5f5f5;
+  --text-color: #181c32;
+  --text-light: #6c757d;
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --warning-color: #ffc107;
+  --info-color: #17a2b8;
+  --background-color: #ffffff;
+  --border-color: #e0e0e0;
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --transition: all 0.3s ease;
+  --navbar-height: 76px; /* Define navbar height as a variable */
+}
+
+body {
+  background-color: #f8f9fa;
+  color: var(--text-color);
+  font-family: "Poppins", sans-serif;
+}
+
+/* Home page specific adjustments */
+.home-container {
+  padding-top: 1.5rem;
+}
+
+/* Card Styling */
+.munshi-card {
+  border: none;
+  border-radius: 16px; /* More rounded corners */
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.munshi-card:hover {
+  box-shadow: 0 8px 20px rgba(127, 133, 213, 0.15);
+  transform: translateY(-2px);
+}
+
+.munshi-card .card-header {
+  background-color: white;
+  border-bottom: 1px solid var(--border-color);
+  padding: 1.2rem 1.5rem;
+  font-weight: 600;
+}
+
+.munshi-card .card-body {
+  padding: 1.5rem;
+}
+
+.main-card {
+  height: 100%;
+}
+
+/* Button Styling */
+.btn-primary {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--primary-dark) !important;
+  border-color: var(--primary-dark) !important;
+  box-shadow: 0 4px 8px rgba(127, 133, 213, 0.3) !important;
+}
+
+.btn-outline-primary {
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  background-color: var(--primary-light) !important;
+  color: var(--primary-dark) !important;
+}
+
+.btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.375rem 0.75rem;
+  border-radius: 4px;
+}
+
+.view-toggle {
+  display: flex;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.view-toggle .btn {
+  border-radius: 0;
+  margin: 0;
+}
+
+.view-toggle .btn:first-child {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.view-toggle .btn:last-child {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.add-transaction-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Filter Section */
+.filter-section {
+  background-color: var(--primary-light);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 1.5rem;
+  border-radius: 12px 12px 0 0;
+}
+
+.filter-section .form-label {
+  font-weight: 500;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.reset-filters-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Table Styling */
+.data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.data-table th {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  font-weight: 600;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.data-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+}
+
+.data-table tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Empty State */
+.empty-state {
+  color: var(--text-light);
+}
+
+.empty-icon {
+  color: var(--text-light);
+  opacity: 0.5;
+}
+
+/* Transaction Item Styling */
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+.transaction-item:hover {
+  background-color: rgba(127, 133, 213, 0.05);
+}
+
+.transaction-item:last-child {
+  border-bottom: none;
+}
+
+.transaction-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.transaction-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.transaction-icon.expense {
+  background-color: var(--danger-color);
+}
+
+.transaction-icon.income {
+  background-color: var(--success-color);
+}
+
+.transaction-details h6 {
+  margin-bottom: 2px;
+}
+
+.transaction-amount {
+  font-weight: 600;
+}
+
+.amount-expense {
+  color: var(--danger-color);
+}
+
+.amount-income {
+  color: var(--success-color);
+}
+
+/* Forms and Inputs */
+.form-control,
+.form-select {
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: var(--transition);
+  padding: 0.6rem 1rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(127, 133, 213, 0.25);
+}
+
+/* React DatePicker Custom Styles */
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker-popper {
+  z-index: 1040 !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .card-header h5 {
+    font-size: 1rem;
+  }
+
+  .munshi-card .card-body {
+    padding: 1rem;
+  }
+
+  .filter-section {
+    padding: 1rem;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 0.5rem;
+  }
+
+  .transaction-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* Adjust for smaller navbar on mobile */
+  :root {
+    --navbar-height: 60px;
+  }
+}
+
+/* Add this to your existing home.css file */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.mt-5.mb-5 {
+  flex: 1;
+  padding-top: 70px; /* Adjust this value based on your header height */
+}

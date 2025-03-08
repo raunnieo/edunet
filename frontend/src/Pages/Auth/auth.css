@@ -1,0 +1,274 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+/* General styles */
+.lnk {
+  text-decoration: none;
+}
+
+/* Login Landing Page Styles */
+.login-landing-page {
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #181c32 0%, #1e2240 100%);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Navbar styles */
+.login-navbar {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.munshi-logo-small {
+  width: 45px;
+  height: 45px;
+  border-radius: 10%;
+  object-fit: cover;
+}
+
+.munshi-brand {
+  font-weight: 700;
+  font-size: 3rem;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+
+.register-button {
+  border-radius: 50px;
+  padding: 0.4rem 1.5rem;
+  font-weight: 600;
+  border: 2px solid #7f85d5;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.register-button:hover {
+  background-color: #7f85d5;
+  border-color: #7f85d5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(127, 133, 213, 0.3);
+}
+
+/* Hero section styles */
+.hero-section {
+  padding: 3rem 0;
+  display: flex;
+  align-items: center;
+  min-height: calc(100vh - 68px);
+  flex: 1;
+}
+
+.hero-title {
+  color: #eeb84e;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.text-highlight {
+  color: #488d7b;
+  position: relative;
+}
+
+.text-highlight:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 3px;
+  background-color: #7f85d5;
+  border-radius: 3px;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+  opacity: 0.85;
+  max-width: 500px;
+}
+
+/* Feature list */
+.feature-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  background-color: rgba(127, 133, 213, 0.1);
+  padding: 0.75rem 1.25rem;
+  border-radius: 50px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+  background-color: rgba(127, 133, 213, 0.2);
+  transform: translateY(-2px);
+}
+
+.feature-icon {
+  margin-right: 8px;
+  color: #7f85d5;
+  display: flex;
+  align-items: center;
+}
+
+/* Login card */
+.login-card {
+  border: none;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  color: #333;
+
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.munshi-login-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.login-title {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #181c32;
+  margin-bottom: 0.5rem;
+}
+
+.login-input {
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e0e0e0;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.login-input:focus {
+  border-color: #7f85d5;
+  box-shadow: 0 0 0 0.2rem rgba(127, 133, 213, 0.25);
+}
+
+.forgot-link {
+  color: #6971c9;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.forgot-link:hover {
+  color: #181c32;
+  text-decoration: underline;
+}
+
+.login-button {
+  background-color: #7f85d5;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.login-button:hover,
+.login-button:focus {
+  background-color: #6971c9;
+  box-shadow: 0 4px 8px rgba(127, 133, 213, 0.3);
+  transform: translateY(-2px);
+}
+
+.signup-link {
+  color: #7f85d5;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.signup-link:hover {
+  color: #6971c9;
+  text-decoration: underline;
+}
+
+/* Legacy red button style - kept for backward compatibility */
+.btnStyle {
+  background-color: #7f85d5;
+  border: 2px solid #7f85d5;
+}
+
+.btnStyle:hover {
+  background-color: #6971c9;
+  border-color: #6971c9;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+  .hero-section {
+    text-align: center;
+    padding-top: 2rem;
+    flex: none;
+    padding-bottom: 2rem;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .feature-list {
+    justify-content: center;
+    margin-bottom: 3rem;
+  }
+
+  .login-card {
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .feature-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .feature-item {
+    width: 100%;
+    justify-content: center;
+  }
+}
